@@ -16,11 +16,13 @@ def main():
             if event.type == pygame.QUIT:
                 return
         
-        screen.fill("black")
+        # Update Player status
+        player.update(dt)
 
+        # Draw game world
+        screen.fill("black")
         # Update Player position
         player.draw(screen)
-
         # Refresh screen
         pygame.display.flip()
 
