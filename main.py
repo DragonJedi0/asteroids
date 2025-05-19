@@ -6,23 +6,32 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
-    dt = 0.0
-    x = SCREEN_WIDTH / 2
-    y = SCREEN_HEIGHT / 2
-    player = Player(x, y)
+
+    updateable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
+
+    Player.containers = (updateable, drawable)
+
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+
+    dt = 0
+    
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         
-        # Update Player status
-        player.update(dt)
+        # Update objects statuses
+        updateable.update(dt)
 
-        # Draw game world
+        # Draw game void
         screen.fill("black")
-        # Update Player position
-        player.draw(screen)
+
+        # Update objects positions
+        for object in drawable:
+            object.draw(screen)
+
         # Refresh screen
         pygame.display.flip()
 
